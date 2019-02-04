@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import { getList } from './Redux/Actions';
 
 const styles = theme => ({
     root: {
@@ -27,6 +28,11 @@ constructor(props){
         spacing: '16',
     }
 }
+
+    componentDidMount(){
+        this.props.handleFetch()
+    }    
+
     render(){
     const { classes } = this.props;
     const { spacing } = this.state;
@@ -65,5 +71,12 @@ const mapStateToProps = (state) => {
     };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleFetch: () => {
+            dispatch(getList())
+        }
+    }
+}
 
-export default connect(mapStateToProps)(withStyles(styles)(ImageList));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ImageList));
