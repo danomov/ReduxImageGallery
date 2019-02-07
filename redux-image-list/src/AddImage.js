@@ -25,7 +25,7 @@ class AddImage extends React.PureComponent {
     render() {
         return (
             <React.Fragment>
-            <h1 style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1>            
+            <Link to='/' style={{color: 'black', textDecoration: 'none'}}><h1 style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1></Link>            
             <form style={{marginTop: '50px'}} className='Add image' onSubmit={(e) => {e.preventDefault(); e.target.reset()}}>
             <TextField variant="outlined" margin="normal" label="LINK" name='input1' onChange={this.onChange} type='text' placeholder='Image Link'/>
             <br/>
@@ -33,7 +33,7 @@ class AddImage extends React.PureComponent {
             <br/>
             <Button style={{marginTop: '20px'}} variant='contained' color='secondary' type='submit' onClick={this.handleAdd}>Add</Button>
             </form>
-            <Link to='/'><Button style={{marginTop: '50px'}} variant='contained' color='primary'>BACK</Button></Link>
+            <Link to='/'><Button style={{marginTop: '50px'}} variant='contained' color='primary'>Back</Button></Link>
             </React.Fragment>
         )
     }

@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import { getList } from './Redux/Actions';
+import { getList, deleteImage } from './Redux/Actions';
 
 const styles = theme => ({
     root: {
@@ -33,24 +33,30 @@ constructor(props){
         this.props.handleFetch()
     }    
 
+    handleDelete = (id) => {
+        this.props.handleDelete(id)
+    }
+
     render(){
     const { classes } = this.props;
     const { spacing } = this.state;
 
         return (
             <React.Fragment>
-            <h1 style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1>
-            <Link to='/new'><Button variant='contained' color='primary' style={{marginTop: '50px', marginBottom: '50px'}}>NEW IMAGE</Button></Link>
+            <Link to='/' style={{color: 'black', textDecoration: 'none'}}><h1 style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1></Link>
+            <Link to='/new'><Button variant='contained' color='primary' style={{marginTop: '50px', marginBottom: '50px'}}>New image</Button></Link>
             <Grid container className={classes.root} spacing={16}>
               <Grid item xs={12}>
                 <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
                     {this.props.imageList.map((element, index) => {
                     return (
-                    <Grid key={index} item>
+                    <Grid onClick={(e) => {this.props.handleOpen(element.image)}} key={index} item>
                       <Paper style={{height: '370px', width: 'auto'}} className={classes.paper}>
                       <img style={{height: '300px'}} alt='images' src={element.image}/>
                       <p style={{fontFamily: "'Playfair Display SC', serif"}}>{element.text}</p>
                       </Paper>
+                      <Link to={`/edit/${element.id}`} style={{color: 'black', textDecoration: 'none'}}><Button variant='contained' color='primary' style={{marginTop: '10px', marginBottom: '50px'}}>Edit image</Button></Link>
+                      <Button onClick={(e) => this.handleDelete(e.target.getAttribute('index'))} index={element.id} variant='contained' color='secondary' style={{marginTop: '10px', marginLeft: '10px', marginBottom: '50px'}}>Delete image</Button>
                     </Grid>
                     )})}
                 </Grid>
@@ -75,6 +81,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         handleFetch: () => {
             dispatch(getList())
+        },
+        handleDelete: (id) => {
+            dispatch(deleteImage(id))
         }
     }
 }

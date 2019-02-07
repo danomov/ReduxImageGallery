@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import ImageList from './ImageList';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import AddImage from './AddImage';
+import EditImage from './EditImage';
+import ModalWrappedImageList from './withModal';
 
 class App extends Component {
   render() {
@@ -10,8 +11,9 @@ class App extends Component {
       <Router>
       <div className="App">
       <Switch>
-        <Route path='/' exact component={ImageList}/>
+        <Route path='/' exact component={ModalWrappedImageList}/>
         <Route path='/new' exact component={AddImage}/>
+        <Route path='/edit/:id' exact component={EditImage}/>
       </Switch>
       </div>
       </Router>
