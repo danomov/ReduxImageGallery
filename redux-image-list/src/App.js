@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import AddImage from './AddImage';
-import EditImage from './EditImage';
-import ModalWrappedImageList from './withModal';
+import AddImage from './Components/AddImage';
+import EditImage from './Components/EditImage';
+import ModalWrappedImageList from './Components/withModal';
 
 class App extends Component {
   render() {

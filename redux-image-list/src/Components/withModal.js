@@ -44,7 +44,7 @@ import ImageList from './ImageList';
   
     render() {
       const { classes } = this.props;
-  
+
       return (
         <div>
           <ImageList handleOpen={this.handleOpen}/>
