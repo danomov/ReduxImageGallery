@@ -1,4 +1,5 @@
 export const GET_LIST = 'GET_LIST';
+export const LOADING = 'LOADING'
 
 export const fetchData = async (url, method, image, text) => {
 try {
@@ -45,6 +46,9 @@ catch(e) {
 
 export const getList = () => {
     return async (dispatch) => {
+        dispatch({
+            type: LOADING,
+        })
         const data = await fetchData('items', 'GET')
         dispatch({
             type: GET_LIST,

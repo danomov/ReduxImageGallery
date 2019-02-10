@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { getList, deleteImage } from '../Redux/Actions';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
     root: {
@@ -46,6 +47,7 @@ constructor(props){
             <React.Fragment>
             <Link to='/' style={{color: 'black', textDecoration: 'none'}}><h1 className='h1' style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1></Link>
             <Link to='/new'><Button variant='contained' color='primary' style={{marginTop: '50px', marginBottom: '50px'}}>New image</Button></Link>
+            {!this.props.imageList.isLoading ?
             <Grid container className={classes.root} spacing={16}>
               <Grid item xs={12}>
                 <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
@@ -63,6 +65,7 @@ constructor(props){
                 </Grid>
               </Grid>
             </Grid>
+            : <h1>Loading <CircularProgress color='secondary'/></h1>}
             </React.Fragment>
         )
     }
