@@ -38,6 +38,13 @@ constructor(props){
         this.props.handleDelete(id);
     }
 
+    handleNightMode = () => {
+        localStorage.setItem('mode', (localStorage.getItem('mode') || 'dark') === 'dark' ? 'light' : 'dark'); 
+        localStorage.getItem('mode') === 'dark' ? 
+        document.querySelector('body').classList.add('dark') 
+        : document.querySelector('body').classList.remove('dark')
+    }
+
     render(){
     const { classes } = this.props;
     const { spacing } = this.state;
@@ -46,7 +53,11 @@ constructor(props){
         return (
             <React.Fragment>
             <Link to='/' style={{color: 'black', textDecoration: 'none'}}><h1 className='h1' style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1></Link>
-            <Link to='/new'><Button variant='contained' color='primary' style={{marginTop: '50px', marginBottom: '50px'}}>New image</Button></Link>
+            <Link to='/new'><Button variant='contained' color='primary' style={{marginTop: '50px', marginBottom: '50px', marginRight: '10px'}}>New image</Button></Link> 
+            <label className="switch">
+            <input type="checkbox" onClick={this.handleNightMode}/>
+            <span className="slider round"></span>
+            </label>
             {!this.props.imageList.isLoading ?
             <Grid container className={classes.root} spacing={16}>
               <Grid item xs={12}>

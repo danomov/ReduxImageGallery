@@ -29,11 +29,23 @@ class AddImage extends React.PureComponent {
         this.props.handleAdd(this.state.input1, this.state.input2)
     }
 
+    handleNightMode = () => {
+        localStorage.setItem('mode', (localStorage.getItem('mode') || 'dark') === 'dark' ? 'light' : 'dark'); 
+        localStorage.getItem('mode') === 'dark' ? 
+        document.querySelector('body').classList.add('dark') 
+        : document.querySelector('body').classList.remove('dark')
+    }
+
     render() {
         return (
             <React.Fragment>
             <Link to='/' style={{color: 'black', textDecoration: 'none'}}><h1 style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1></Link>            
             <form style={{marginTop: '50px'}} className='Add image' onSubmit={(e) => {e.preventDefault()}}>
+            <label className="switch">
+            <input type="checkbox" onClick={this.handleNightMode}/>
+            <span className="slider round"></span>
+            </label>
+            <br/>
             <TextField variant="outlined" margin="normal" label="LINK" name='input1' onChange={this.onChange} type='text' placeholder='Image Link'/>
             <p style={{color: 'red'}}>{this.state.imageError ? this.state.imageError[0] : ''}</p>
             <TextField variant="outlined" margin="normal" label="DESCRIPTION" name='input2' onChange={this.onChange} type='text' placeholder='Image Description'/>
