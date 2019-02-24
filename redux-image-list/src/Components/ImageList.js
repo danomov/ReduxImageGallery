@@ -31,11 +31,11 @@ constructor(props){
 }
 
     componentDidMount(){
-        this.props.handleFetch()
+        this.props.handleFetch();
     }    
 
     handleDelete = (id) => {
-        this.props.handleDelete(id)
+        this.props.handleDelete(id);
     }
 
     render(){
@@ -53,8 +53,8 @@ constructor(props){
                 <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
                     {this.props.imageList.data.map((element, index) => {
                     return (
-                    <Grid onClick={() => {this.props.handleOpen(element.image)}} key={index} item>
-                      <Paper id='paper' style={{height: '370px', width: 'auto'}} className={classes.paper}>
+                    <Grid key={index} item>
+                      <Paper id='paper' onClick={() => {this.props.handleOpen(element.image)}} style={{height: '370px', width: 'auto'}} className={classes.paper}>
                       <img style={{height: '300px'}} alt='images' src={element.image}/>
                       <p style={{fontFamily: "'Playfair Display SC', serif"}}>{element.text}</p>
                       </Paper>
@@ -77,17 +77,17 @@ ImageList.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        imageList: state
+        imageList: state,
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         handleFetch: () => {
-            dispatch(getList())
+            dispatch(getList());
         },
         handleDelete: (id) => {
-            dispatch(deleteImage(id))
+            dispatch(deleteImage(id));
         }
     }
 }

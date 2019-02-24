@@ -4,6 +4,4 @@ import thunk from 'redux-thunk';
 
 const store = createStore(imageLists, applyMiddleware(thunk));
 
-store.subscribe(() => console.log(store.getState()))
-
 export default store;

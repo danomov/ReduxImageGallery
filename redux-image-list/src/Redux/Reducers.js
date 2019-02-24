@@ -1,8 +1,10 @@
-import { GET_LIST, LOADING } from './Actions';
+import { GET_LIST, LOADING, ERROR } from './Actions';
 
 const initialState = {
     data: [],
     isLoading: false,
+    isErrored: false,
+    errorText: '',
 }
 
 export default function imageLists(state = initialState, action) {
@@ -11,6 +13,8 @@ export default function imageLists(state = initialState, action) {
         state = {
             ...state,
             isLoading: true,
+            isErrored: false,
+            errorText: '',
         }
         return state
         case GET_LIST:
@@ -18,10 +22,21 @@ export default function imageLists(state = initialState, action) {
         state = {
             ...state,
             data,
-            isLoading: false
+            isLoading: false,
+            isErrored: false,
+            errorText: '',
         }
         return state
+        case ERROR:
+        const errorText = action.err;
+        state = {
+            ...state,
+            isErrored: true,
+            isLoading: false,
+            errorText,
+        }
+        return state;
         default:
-        return state
+        return state;
     }
 }

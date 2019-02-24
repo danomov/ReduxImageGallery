@@ -11,8 +11,15 @@ class AddImage extends React.PureComponent {
         this.state = {
             input1: '',
             input2: '',
+            imageError: '',
+            textError: '',
         }
     }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({imageError: nextProps.error.image, textError: nextProps.error.text})
+    }
+    
 
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -26,11 +33,11 @@ class AddImage extends React.PureComponent {
         return (
             <React.Fragment>
             <Link to='/' style={{color: 'black', textDecoration: 'none'}}><h1 style={{fontFamily: "'Great Vibes', cursive"}}>Danomov Gallery</h1></Link>            
-            <form style={{marginTop: '50px'}} className='Add image' onSubmit={(e) => {e.preventDefault(); e.target.reset()}}>
+            <form style={{marginTop: '50px'}} className='Add image' onSubmit={(e) => {e.preventDefault()}}>
             <TextField variant="outlined" margin="normal" label="LINK" name='input1' onChange={this.onChange} type='text' placeholder='Image Link'/>
-            <br/>
+            <p style={{color: 'red'}}>{this.state.imageError ? this.state.imageError[0] : ''}</p>
             <TextField variant="outlined" margin="normal" label="DESCRIPTION" name='input2' onChange={this.onChange} type='text' placeholder='Image Description'/>
-            <br/>
+            <p style={{color: 'red'}}>{this.state.textError ? this.state.textError[0] : ''}</p>
             <Button style={{marginTop: '20px'}} variant='contained' color='secondary' type='submit' onClick={this.handleAdd}>Add</Button>
             </form>
             <Link to='/'><Button style={{marginTop: '50px'}} variant='contained' color='primary'>Back</Button></Link>
@@ -38,6 +45,12 @@ class AddImage extends React.PureComponent {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        error: state.errorText,
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -48,4 +61,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(null, mapDispatchToProps)(AddImage);
+export default connect(mapStateToProps, mapDispatchToProps)(AddImage);
