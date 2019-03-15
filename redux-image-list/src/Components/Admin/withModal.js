@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import ImageList from './ImageList';
 
-  
   function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -28,38 +27,41 @@ import ImageList from './ImageList';
     },
   });
   
-  class ImageListWithModal extends React.Component {
-    state = {
+class ImageListWithModal extends React.Component {
+  constructor(){
+    super()
+    this.state = {
       open: false,
       image: '',
     };
+  }
   
-    handleOpen = (src) => {
-      this.setState({ open: true, image: src });
-    };
+  handleOpen = (src) => {
+    this.setState({ open: true, image: src });
+  };
+   
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   
-    handleClose = () => {
-      this.setState({ open: false });
-    };
-  
-    render() {
-      const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
-      return (
-        <div>
-          <ImageList handleOpen={this.handleOpen}/>
-          <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={this.state.open}
-            onClose={this.handleClose}
-            style={{margin: '0 auto'}}>
-            <div style={getModalStyle()} className={classes.paper}>
-              <img onClick={this.handleClose} alt='modalImage' style={{height: '100%', width: '100%'}} src={this.state.image}/>
-            </div>
-           </Modal>
-        </div>
-      );
+  return (
+      <div>
+        <ImageList handleOpen={this.handleOpen}/>
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.open}
+          onClose={this.handleClose}
+          style={{margin: '0 auto'}}>
+          <div style={getModalStyle()} className={classes.paper}>
+            <img onClick={this.handleClose} alt='modalImage' style={{height: '100%', width: '100%'}} src={this.state.image}/>
+          </div>
+        </Modal>
+      </div>
+    );
     }
   }
   

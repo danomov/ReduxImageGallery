@@ -19,6 +19,7 @@ try {
         method,
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token'),
         },
     });
     return await filterResponse(response, method);
@@ -28,6 +29,7 @@ try {
         method,
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token'),
         },
         body: JSON.stringify(
             {
